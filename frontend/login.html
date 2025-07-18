@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jiu-Jitsu Hype</title>
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="login.css"> </head>
+<body>
+    <div class="liquid-bg"></div>
+
+    <div class="login-container">
+        <div class="login-box">
+            <i class="ri-bubble-chart-line logo-icon"></i>
+            <h1>Jiu-Jitsu <span>Hype</span></h1>
+            <p>Por favor, faça o login para continuar.</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+            </form>
+            <p id="errorMessage" class="error-message"></p>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

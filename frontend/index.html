@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jiu-Jitsu Hype - Sistema de Academia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="liquid-bg"></div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar__header">
+                <i class="ri-bubble-chart-line logo-icon"></i>
+                <h1 class="logo-text">Jiu-Jitsu <span>Hype</span></h1>
+            </div>
+
+            <nav class="sidebar__nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-link active"><i
+                                class="ri-dashboard-line"></i><span>Resumo</span></a></li>
+                    <li><a href="#alunos" class="nav-link"><i class="ri-group-line"></i><span>Alunos</span></a></li>
+                    <li><a href="#mensalidades" class="nav-link"><i
+                                class="ri-wallet-3-line"></i><span>Mensalidades</span></a></li>
+                    <li><a href="#financeiro" class="nav-link"><i
+                                class="ri-money-dollar-circle-line"></i><span>Financeiro</span></a></li>
+                    <li><a href="#configuracoes" class="nav-link"><i
+                                class="ri-settings-3-line"></i><span>Configurações</span></a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar__footer">
+                <p>&copy; 2025 Jiu-Jitsu Hype</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="search-bar">
+                    <i class="ri-search-line"></i>
+                    <input type="text" id="searchInput" placeholder="Pesquisar por aluno...">
+                </div>
+                <button class="mobile-menu-toggle"><i class="ri-menu-line"></i></button>
+            </header>
+
+            <section id="dashboard" class="content-section active">
+                <h2>Resumo Geral</h2>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <i class="ri-group-fill card-icon"></i>
+                        <div class="card-info">
+                            <span id="total-alunos-ativos">0</span>
+                            <p>Alunos Ativos</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <i class="ri-calendar-close-fill card-icon"></i>
+                        <div class="card-info">
+                            <span id="mensalidades-pendentes-semana">0</span>
+                            <p>Pendentes na Semana</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <i class="ri-task-fill card-icon"></i>
+                        <div class="card-info">
+                            <span id="alunos-em-dia">0</span>
+                            <p>Alunos em Dia</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <i class="ri-line-chart-fill card-icon"></i>
+                        <div class="card-info">
+                            <span id="faturamento-mes-dashboard">R$ 0</span>
+                            <p>Faturamento no Mês</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="alunos" class="content-section">
+                <div class="section-header">
+                    <h2>Gerenciar Alunos</h2>
+                    <div class="filter-buttons" id="alunoStatusFilter">
+                        <button class="btn filter-btn active" data-filter="ativos">Ativos</button>
+                        <button class="btn filter-btn" data-filter="inativos">Inativos</button>
+                        <button class="btn filter-btn" data-filter="todos">Todos</button>
+                    </div>
+                    <button class="btn btn-primary" id="openCadastroModalBtn"><i class="ri-add-line"></i> Cadastrar
+                        Aluno</button>
+                </div>
+                <div class="table-container">
+                    <table id="alunosTable">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Faixa</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="mensalidades" class="content-section">
+                <div class="section-header">
+                    <h2>Controle de Mensalidades</h2>
+                    <div class="filter-buttons" id="mensalidadeStatusFilter">
+                        <button class="btn filter-btn active" data-filter="all">Todos</button>
+                        <button class="btn filter-btn" data-filter="atrasado">Atrasados</button>
+                        <button class="btn filter-btn" data-filter="pendente">Vencendo na Semana</button>
+                        <button class="btn filter-btn" data-filter="pago">Em Dia</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="mensalidadesTable">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Próximo Vencimento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="financeiro" class="content-section">
+                <div class="section-header">
+                    <h2>Visão Financeira</h2>
+                    <div class="filter-buttons">
+                        <select id="financeiroAnoFiltro" class="form-group select"></select>
+                        <select id="financeiroMesFiltro" class="form-group select"></select>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-info">
+                            <span id="faturamentoBrutoMes">R$ 0,00</span>
+                            <p>Faturamento Bruto (Mês)</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-info">
+                            <span id="faturamentoBrutoAno">R$ 0,00</span>
+                            <p>Faturamento Bruto (Ano)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="faturamentoChart"></canvas>
+                </div>
+                <div class="table-container" style="margin-top: 2rem;">
+                    <h3>Lançamentos do Período</h3>
+                    <table id="lancamentosTable">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Aluno</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="configuracoes" class="content-section">
+                <h2>Configurações</h2>
+                <div class="config-card">
+                    <h3>Valor da Mensalidade</h3>
+                    <p>Defina o valor padrão para os pagamentos de mensalidade.</p>
+                    <div class="form-group">
+                        <label for="valorMensalidade">Valor (R$)</label>
+                        <input type="number" id="valorMensalidade" step="0.01" placeholder="Ex: 150.00">
+                        <button id="salvarConfigBtn" class="btn btn-primary" style="margin-top: 1rem;">Salvar</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="cadastroModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <form id="alunoForm">
+                <h3>Cadastro de Aluno</h3>
+                <div class="form-grid">
+                    <div class="form-group"><label for="nome">Nome Completo</label><input type="text" id="nome"
+                            required></div>
+                    <div class="form-group"><label for="tipo">Tipo</label><select id="tipo" required>
+                            <option value="Adulto">Adulto</option>
+                            <option value="Kid">Kid</option>
+                        </select></div>
+                    <div class="form-group"><label for="peso">Peso (kg)</label><input type="number" step="0.1" id="peso"
+                            required></div>
+                    <div class="form-group"><label for="altura">Altura (m)</label><input type="number" step="0.01"
+                            id="altura" required></div>
+                    <div class="form-group"><label for="faixa">Faixa</label><select id="faixa" required>
+                            <option>Branca</option>
+                            <option>Cinza</option>
+                            <option>Amarela</option>
+                            <option>Laranja</option>
+                            <option>Verde</option>
+                            <option>Azul</option>
+                            <option>Roxa</option>
+                            <option>Marrom</option>
+                            <option>Preta</option>
+                        </select></div>
+                    <div class="form-group"><label for="idade">Idade</label><input type="number" id="idade" required>
+                    </div>
+                    <div class="form-group"><label for="telefone">Telefone (com DDD)</label><input type="tel"
+                            id="telefone" placeholder="11999998888" required></div>
+                    <div class="form-group"><label for="turma">Turma</label><select id="turma" required>
+                            <option value="10:00">10:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="20:00">20:00</option>
+                        </select></div>
+                    <div class="form-group"><label for="dataCadastro">Data de Cadastro</label><input type="date"
+                            id="dataCadastro"></div>
+                </div>
+                <div id="responsavelFields" class="hidden">
+                    <h4>Dados do Responsável</h4>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="responsavelNome">Nome</label><input type="text"
+                                id="responsavelNome"></div>
+                        <div class="form-group"><label for="responsavelTelefone">Telefone</label><input type="tel"
+                                id="responsavelTelefone" placeholder="11999998888"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Salvar Cadastro</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <form id="editAlunoForm">
+                <h3>Editar Perfil do Aluno</h3>
+                <input type="hidden" id="editAlunoId">
+                <div class="form-grid">
+                    <div class="form-group"><label for="editNome">Nome</label><input type="text" id="editNome" required>
+                    </div>
+                    <div class="form-group"><label for="editTipo">Tipo</label><select id="editTipo" required>
+                            <option value="Adulto">Adulto</option>
+                            <option value="Kid">Kid</option>
+                        </select></div>
+                    <div class="form-group"><label for="editPeso">Peso (kg)</label><input type="number" step="0.1"
+                            id="editPeso" required></div>
+                    <div class="form-group"><label for="editAltura">Altura (m)</label><input type="number" step="0.01"
+                            id="editAltura" required></div>
+                    <div class="form-group"><label for="editFaixa">Faixa</label><select id="editFaixa" required>
+                            <option>Branca</option>
+                            <option>Cinza</option>
+                            <option>Amarela</option>
+                            <option>Laranja</option>
+                            <option>Verde</option>
+                            <option>Azul</option>
+                            <option>Roxa</option>
+                            <option>Marrom</option>
+                            <option>Preta</option>
+                        </select></div>
+                    <div class="form-group"><label for="editIdade">Idade</label><input type="number" id="editIdade"
+                            required></div>
+                    <div class="form-group"><label for="editTelefone">Telefone</label><input type="tel"
+                            id="editTelefone" placeholder="11999998888" required></div>
+                    <div class="form-group"><label for="editTurma">Turma</label><select id="editTurma" required>
+                            <option value="10:00">10:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="20:00">20:00</option>
+                        </select></div>
+                </div>
+                <div id="editResponsavelFields" class="hidden">
+                    <h4>Dados do Responsável</h4>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="editResponsavelNome">Nome</label><input type="text"
+                                id="editResponsavelNome"></div>
+                        <div class="form-group"><label for="editResponsavelTelefone">Telefone</label><input type="tel"
+                                id="editResponsavelTelefone" placeholder="11999998888"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
