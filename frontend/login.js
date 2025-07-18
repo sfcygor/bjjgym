@@ -29,7 +29,7 @@ document
 
       // 3. Aguarda 1 segundo e SÓ DEPOIS redireciona para a página principal
       setTimeout(() => {
-        window.location.href = "index.html";
+        window.location.href = '/app';
       }, 1000); // 1000 milissegundos = 1 segundo
     } else {
       // ...
