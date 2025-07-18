@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sessionStorage.getItem('usuarioLogado') !== 'true') 
         // Se o usuário não estiver logado, chuta ele de volta para a página de login
         window.location.href = 'login.html';
-    const API_URL = 'http://localhost:3002/api'; // Verifique se a porta está correta!
+    const API_URL = 'https://sistema-academia-ygor.onrender.com/api';
 
     // =================================================================
     // 1. ESTADO DA APLICAÇÃO (DADOS GLOBAIS)
